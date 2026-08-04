@@ -724,7 +724,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 <body>
 <header>
   <h1>BoatTrip 2026 · Rundtouren mit der Azimut ab Trogir</h1>
-  <p>MS Azimut — Motorsegler, 33 m, 33 Gäste, 10 kn · Start Samstag mittags, zurück bis Freitag · Tagesbudget bis 43 sm (zwischen den Tagen verschiebbar) · Wochenbudget ≈ 7 × 43 = <b>301 sm</b>. Jede Nacht ein fester Liegeplatz an einem (Alt-)Stadtkai; kleine Buchten sind als Badestopps per Anker/Tender eingeplant. Vier Varianten. Stopps der Riva-Standardrouten sind ok — geplant ist nur, nie am selben Wochentag am selben Kai zu liegen wie die Flotte (die startet ebenfalls samstags in Trogir). Belegt ist der Takt der Südschleife T3: Sa Split · So Hvar · Mo Mljet/Polače · Di Dubrovnik · Mi Korčula · Do Brač · Fr Trogir; der T1-Takt (Bol–Korčula–Lastovo–Vis–Biševo–Hvar) ist abgeleitet/unbestätigt, der T2-Takt (Nord) unbekannt — Badges an den Tagen zeigen den Status.</p>
+  <p>MS Azimut — Motorsegler, 33 m, 33 Gäste, 10 kn · Start Samstag mittags, zurück bis Freitag · Tagesbudget bis 43 sm (zwischen den Tagen verschiebbar) · Wochenbudget ≈ 7 × 43 = <b>301 sm</b>. Jede Nacht ein fester Liegeplatz an einem (Alt-)Stadtkai; kleine Buchten sind als Badestopps per Anker/Tender eingeplant. Fünf Varianten. Stopps der Riva-Standardrouten sind ok — geplant ist nur, nie am selben Wochentag am selben Kai zu liegen wie die Flotte (die startet ebenfalls samstags in Trogir). Belegt ist der Takt der Südschleife T3: Sa Split · So Hvar · Mo Mljet/Polače · Di Dubrovnik · Mi Korčula · Do Brač · Fr Trogir; der T1-Takt (Bol–Korčula–Lastovo–Vis–Biševo–Hvar) ist abgeleitet/unbestätigt, der T2-Takt (Nord) unbekannt — Badges an den Tagen zeigen den Status.</p>
 </header>
 <div id="layout">
   <div id="side">
@@ -740,6 +740,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
       <span class="dot" style="background:var(--b)"></span>Variante B&nbsp;&nbsp;
       <span class="dot" style="background:var(--c)"></span>Variante C&nbsp;&nbsp;
       <span class="dot" style="background:#7c3aed"></span>Variante D&nbsp;&nbsp;
+      <span class="dot" style="background:#0891b2"></span>Variante E&nbsp;&nbsp;
       <span class="dot" style="background:var(--std)"></span>Standardrouten-Stopps<br>
       Badges je Übernachtung: <span style="color:#047857">✓ grün</span> = Riva-Flotte an anderem Wochentag hier · <span style="color:#c2410c">orange</span> = evtl. gleicher Tag (T1-Takt unbestätigt) · <span style="color:#b91c1c">rot</span> = belegte Kollision · grau = Takt unbekannt (T2).<br>
       Distanzen = Großkreis entlang grober Wegpunkte, gerundet; in der Praxis +5–10 % einplanen. Planungsskizze, keine navigatorische Grundlage — Revierführer &amp; Seekarte bleiben maßgeblich.
@@ -753,8 +754,9 @@ const H = {
   rogoznica:{n:"Rogoznica",c:[43.527,15.966],d:"Tief eingeschnittene Allwetterbucht; Salzsee „Drachenauge“ und Abendspaziergang auf der Halbinsel Gradina.",m:"Stadtkai an der Riva; Ausweich Marina Frapa (Großliegeplätze)"},
   primosten:{n:"Primošten",c:[43.585,15.923],d:"Bilderbuch-Altstadt auf der Halbinsel, UNESCO-gelistete Steinweinberge (Babić) am Bucavac — Abendrunde über die Gassen zur Kirche Sv. Juraj.",m:"Stadtkai (Porat) — für ~33 m reservieren; Ausweich Marina Kremik"},
   skradin:{n:"Skradin (Krka)",c:[43.817,15.925],d:"Über den St.-Ante-Kanal, vorbei an Šibenik und durch den Prokljan-See flussaufwärts — eine der schönsten Revierfahrten der Adria. Vom Städtchen per NP-Boot zu den Krka-Wasserfällen.",m:"Kai/ACI Skradin — nimmt auch große Yachten (bis ~70 m)",std:"Krka/Skradin liegt auch auf T2"},
-  zlarin:{n:"Zlarin",c:[43.696,15.842],d:"Autofreie Koralleninsel vor der Šibenik-Einfahrt — Badestopp und Korallenmuseum.",m:"Badestopp (Reede/Tender)"},
-  prvic:{n:"Prvić Luka",c:[43.727,15.799],d:"Autofreie Insel, Memorialmuseum des Erfinders Faust Vrančić — Vormittagsstopp abseits des Promenadentrubels.",m:"Vormittagsstopp (Kai klein — Reede/Tender)"},
+  zlarin:{n:"Zlarin",c:[43.696,15.842],d:"Autofreie Koralleninsel vor der Šibenik-Einfahrt — Korallenmuseum, Abendruhe unter Pinien.",m:"Fährkai (für 33 m mit der Basis abklären) / Reede+Tender"},
+  prvic:{n:"Prvić Luka",c:[43.727,15.799],d:"Autofreie Insel, Memorialmuseum des Erfinders Faust Vrančić — Hafenidyll ganz ohne Promenadentrubel.",m:"Fährkai (für 33 m mit der Basis abklären) / Reede+Tender"},
+  krapanj:{n:"Krapanj",c:[43.672,15.910],d:"Die flachste und am dichtesten besiedelte Adria-Insel, berühmt für ihre Schwammtaucher (Museum im Kloster) — kurioser Badestopp.",m:"Badestopp (Reede/Tender — Umgebung flach)"},
   tribunj:{n:"Tribunj",c:[43.752,15.750],d:"Fischerdorf auf einer Mini-Insel, 149 Stufen auf den Hügel Sv. Nikola, bekannt für seine Esel — Altstadtkai direkt am Ort.",m:"Stadtkai / Marina Tribunj (Großliegeplätze)"},
   kaprije:{n:"Kaprije",c:[43.687,15.709],d:"Autofreies Inseldorf im Šibeniker Archipel — hier legen keine Kreuzfahrer an.",m:"Badestopp (Reede/Tender)"},
   zirje:{n:"Žirje (Muna)",c:[43.663,15.674],d:"Äußerste bewohnte Insel vor Šibenik, sehr still; Festungsruine Gradina mit Kornaten-Blick.",m:"Badestopp (Reede/Tender)"},
@@ -842,6 +844,17 @@ const V = [
    {d:"Mi",from:"polace",to:"velaluka",via:[[42.80,17.40]],note:"Früh in den Nationalpark (Salzseen, Klosterinsel Sv. Marija), mittags Langschlag südlich an Korčula vorbei nach Vela Luka."},
    {d:"Do",from:"velaluka",to:"split",via:[[43.20,16.36],W.vrataSplit],note:"Um Kap Pelegrin und durchs Splitska Vrata — Donnerstagabend Riva & Diokletianpalast in Split (Kai früh reservieren)."},
    {d:"Fr",from:"split",to:"trogir",via:[[43.43,16.35],H.krknjasi.c],mark:["krknjasi"],note:"Kurzer Ausklang: südlich um Čiovo, letzter Badestopp Blaue Lagune, mittags/nachmittags zurück in Trogir."}
+  ]},
+ {id:"E", color:"#0891b2", name:"E · Inselhüpfen Šibenik & Kornaten (ohne Krka)",
+  sub:"Die Insel-Version der Nordrunde: keine Flussfahrt, dafür vier Übernachtungen auf Inseln (Prvić, Murter, Dugi Otok, Zlarin) plus Kornaten-Panorama — kleine autofreie Welten statt Sehenswürdigkeiten-Programm.",
+  days:[
+   {d:"Sa",from:"trogir",to:"primosten",via:[W.ploca],note:"Mittags los, um Kap Ploča — Abend in den Gassen von Primošten, Wein aus den Bucavac-Terrassen."},
+   {d:"So",from:"primosten",to:"prvic",via:[[43.70,15.82]],note:"Kurzetappe mit langem Badestopp in der Tijašćica-Bucht (Insel Tijat) — Nacht am Fährkai von Prvić Luka."},
+   {d:"Mo",from:"prvic",to:"murter",via:[[43.693,15.765],H.kaprije.c,H.zirje.c],mark:["kaprije","zirje"],note:"Inselhüpfen: Badestopps Kaprije und Žirje (Festungsblick über die Kornaten), abends Kai in Betina/Murter."},
+   {d:"Di",from:"murter",to:"sali",via:[W.zutE,W.zut,W.kornatCh],note:"Durch den Kornati-Kanal mit Badestopp bei Žut, abends Fährkai in Sali auf Dugi Otok."},
+   {d:"Mi",from:"sali",to:"zlarin",via:[H.telascica.c,W.proversa,H.piskera.c,[43.744,15.386]],mark:["telascica","piskera"],note:"Vormittag Telašćica (Klippen & Mir-See), Panoramafahrt durch die Außenkornaten, Badestopp Ravni Žakan — Nacht auf der Koralleninsel Zlarin."},
+   {d:"Do",from:"zlarin",to:"rogoznica",via:[H.krapanj.c],mark:["krapanj"],note:"Gemütlicher Tag: Schwammtaucher-Insel Krapanj, Badenachmittag, abends Riva von Rogoznica."},
+   {d:"Fr",from:"rogoznica",to:"trogir",via:[W.ploca,H.krknjasi.c],mark:["krknjasi"],note:"Um Kap Ploča, letzter Badestopp Blaue Lagune, nachmittags zurück in Trogir."}
   ]}
 ];
 
@@ -857,7 +870,8 @@ const CONF={
   ubli:[{r:"T1",day:"Mo",sure:false}],
   rogoznica:[{r:"T2",day:"?",sure:false}],
   skradin:[{r:"T2",day:"?",sure:false}],
-  sali:[{r:"T2",day:"?",sure:false}]
+  sali:[{r:"T2",day:"?",sure:false}],
+  zlarin:[{r:"T2",day:"?",sure:false}]
 };
 function fleetBadge(k,wd){
   const cs=CONF[k]; if(!cs) return "";
