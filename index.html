@@ -724,7 +724,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 <body>
 <header>
   <h1>BoatTrip 2026 · Rundtouren mit der Azimut ab Trogir <a href="guide.html" style="float:right;font-size:13px;color:#db2777;text-decoration:none;font-weight:600">🎧 Audio-Guide Tour F →</a></h1>
-  <p>MS Azimut — Motorsegler, 33 m, 33 Gäste, 10 kn · Start Samstag mittags, zurück bis Freitag · Tagesbudget bis 43 sm (zwischen den Tagen verschiebbar) · Wochenbudget ≈ 7 × 43 = <b>301 sm</b>. Jede Nacht ein fester Liegeplatz an einem (Alt-)Stadtkai; kleine Buchten sind als Badestopps per Anker/Tender eingeplant. Sechs Varianten. Stopps der Riva-Standardrouten sind ok — geplant ist nur, nie am selben Wochentag am selben Kai zu liegen wie die Flotte (die startet ebenfalls samstags in Trogir). Belegt ist der Takt der Südschleife T3: Sa Split · So Hvar · Mo Mljet/Polače · Di Dubrovnik · Mi Korčula · Do Brač · Fr Trogir; der T1-Takt (Bol–Korčula–Lastovo–Vis–Biševo–Hvar) ist abgeleitet/unbestätigt, der T2-Takt (Nord) unbekannt — Badges an den Tagen zeigen den Status.</p>
+  <p>MS Azimut — Motorsegler, 33 m, 33 Gäste, 10 kn · Start Samstag mittags, zurück bis Freitag · Tagesbudget bis 43 sm (zwischen den Tagen verschiebbar) · Wochenbudget ≈ 7 × 43 = <b>301 sm</b>. Jede Nacht ein fester Liegeplatz an einem (Alt-)Stadtkai; kleine Buchten sind als Badestopps per Anker/Tender eingeplant. Unsere Route (Tour F): Sa Vis · So Komiža (Blaue Grotte) · Mo Primošten · Di Sali · Mi Mir-Wanderung & Tribunj · Do Rogoznica · Fr Trogir — ~195 sm, jede Nacht ein anderer Stadtkai. Wochentags-Check gegen die Riva-Flotte (startet ebenfalls samstags in Trogir): Badges an den Tagen zeigen den Status; belegt ist der T3-Takt (Sa Split · So Hvar · Mo Mljet · Di Dubrovnik · Mi Korčula · Do Brač · Fr Trogir), T1 abgeleitet/unbestätigt, T2 unbekannt. Zum mobilen Begleiter: oben rechts der 🎧 Audio-Guide.</p>
 </header>
 <div id="layout">
   <div id="side">
@@ -736,12 +736,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     </div>
     <div id="vpanel"></div>
     <div class="legend">
-      <span class="dot" style="background:var(--a)"></span>Variante A&nbsp;&nbsp;
-      <span class="dot" style="background:var(--b)"></span>Variante B&nbsp;&nbsp;
-      <span class="dot" style="background:var(--c)"></span>Variante C&nbsp;&nbsp;
-      <span class="dot" style="background:#7c3aed"></span>Variante D&nbsp;&nbsp;
-      <span class="dot" style="background:#0891b2"></span>Variante E&nbsp;&nbsp;
-      <span class="dot" style="background:#db2777"></span>Variante F&nbsp;&nbsp;
+      <span class="dot" style="background:#db2777"></span>Tour F (unsere Route)&nbsp;&nbsp;
       <span class="dot" style="background:var(--std)"></span>Standardrouten-Stopps<br>
       Badges je Übernachtung: <span style="color:#047857">✓ grün</span> = Riva-Flotte an anderem Wochentag hier · <span style="color:#c2410c">orange</span> = evtl. gleicher Tag (T1-Takt unbestätigt) · <span style="color:#b91c1c">rot</span> = belegte Kollision · grau = Takt unbekannt (T2).<br>
       Distanzen = Großkreis entlang grober Wegpunkte, gerundet; in der Praxis +5–10 % einplanen. Planungsskizze, keine navigatorische Grundlage — Revierführer &amp; Seekarte bleiben maßgeblich.
@@ -802,71 +797,16 @@ const W = { // helper waypoints (routing around capes/through channels)
   lastW1:[42.752,16.772], lastN:[42.778,16.83], zlarin:[43.696,15.842]
 };
 const V = [
- {id:"A", color:"#2563eb", name:"A · Šibeniker Archipel & Kornaten",
-  sub:"Die stille Nordrunde: Krka-Flussfahrt, autofreie Inseln als Badestopps, Kornaten-Panorama — jede Nacht am Stadtkai (Rogoznica, Skradin, Betina, Sali, Tribunj, Primošten). Meidet Vodice, Šibenik-Stadt & die T2-Kreuzfahrthäfen als Liegeplätze.",
+ {id:"F", color:"#db2777", name:"F · Unsere Route: Vis, Kornaten & Telašćica",
+  sub:"Die gewählte Woche: Samstag direkt hinaus nach Vis, Sonntag über die Blaue Grotte nach Komiža, dann der Nordsprung — Primošten, Sali mit der Wanderung zum Jezero Mir, Tribunj — und zum Ausklang Rogoznica. Sieben Häfen, jede Nacht ein anderer Kai, alle Etappen ≤ 43 sm.",
   days:[
-   {d:"Sa",from:"trogir",to:"rogoznica",via:[W.ploca],note:"Mittags los, um Kap Ploča nach Rogoznica; abends Drachenauge & Konoba — Nacht an der Riva."},
-   {d:"So",from:"rogoznica",to:"skradin",via:[[43.585,15.90],W.stAnte,W.sibenik,W.prokljan],note:"Fotostopp vor Primošten, dann St.-Ante-Kanal und Prokljan-See hinauf — Nacht am Kai von Skradin."},
-   {d:"Mo",from:"skradin",to:"murter",via:[W.prokljan,W.sibenik,W.stAnte,H.zlarin.c],mark:["zlarin"],note:"Früh Krka-Wasserfälle (NP-Boot), mittags Badestopp Zlarin, abends Kai in Betina/Murter."},
-   {d:"Di",from:"murter",to:"sali",via:[W.zutE,W.zut,W.kornatCh],note:"Durch den Kornati-Kanal mit Badestopp bei Žut, abends Fährkai in Sali auf Dugi Otok."},
-   {d:"Mi",from:"sali",to:"tribunj",via:[[43.905,15.21],[43.858,15.23],[43.875,15.19],H.telascica.c,[43.875,15.19],[43.858,15.23],H.piskera.c,[43.744,15.386]],mark:["telascica","piskera"],note:"Südlich um Dugi Otok, durch die Proversa-Enge in die Telašćica (Klippen & Mir-See), dann Panoramafahrt durch die Außenkornaten mit Badestopp Ravni Žakan — Nacht am Kai in Tribunj."},
-   {d:"Do",from:"tribunj",to:"primosten",via:[H.prvic.c],mark:["prvic"],note:"Kurzetappe: Vormittag Prvić Luka (Vrančić-Museum), Badenachmittag, abends Altstadtkai Primošten."},
-   {d:"Fr",from:"primosten",to:"trogir",via:[W.ploca,H.krknjasi.c],mark:["krknjasi"],note:"Um Kap Ploča, letzter Badestopp Blaue Lagune, nachmittags zurück an den Kai in Trogir."}
-  ]},
- {id:"B", color:"#059669", name:"B · Inseln abseits: Brač-Nord, Hvar-Nord, Vela Luka",
-  sub:"Die Genussrunde: Steinmetz-Brač, Hvars ruhige Nordseite und Vela Luka statt Hvar-Stadt, Bol und Korčula-Stadt — Übernachtungen an den Stadtkais von Maslinica/Rogač, Pučišća, Jelsa, Vela Luka, Komiža und Vis.",
-  days:[
-   {d:"Sa",from:"trogir",to:"maslinica",via:[H.krknjasi.c],mark:["krknjasi"],note:"Mittags los, Badestopp Blaue Lagune, kurzer Schlag nach Maslinica (Liegeplatz reservieren; Ausweich Kai Rogač)."},
-   {d:"So",from:"maslinica",to:"pucisca",via:[W.soltaN1,W.soltaN2,W.vrataSplit,W.bracN],note:"Um Šoltas Nordseite, durch das Splitska Vrata, an Bračs Nordküste entlang in den Steinfjord von Pučišća — Nacht am Stadtkai."},
-   {d:"Mo",from:"pucisca",to:"jelsa",via:[H.povlja.c],mark:["povlja"],note:"Badestopp Povlja, dann über den Hvarski Kanal nach Jelsa — abends Platanenplatz & Weinkonobas."},
-   {d:"Di",from:"jelsa",to:"velaluka",via:[W.hvarN,[43.205,16.355],[43.16,16.34]],note:"Westwärts um Kap Pelegrin (Hvar-Stadt & Pakleni ziehen querab vorbei), dann über die offene See nach Vela Luka."},
-   {d:"Mi",from:"velaluka",to:"komiza",via:[],note:"Vormittag Vela Spila & Städtchen, nachmittags Offene-See-Schlag (28 sm) nach Komiža — Kai vorab klären."},
-   {d:"Do",from:"komiza",to:"vis",via:[H.bisevo.c,W.visW,W.visN],mark:["bisevo"],note:"Früh zur Blauen Grotte (vor den Ausflugsbooten!), dann um Vis' Westkap an die Riva von Vis-Stadt — abends Weinkeller."},
-   {d:"Fr",from:"vis",to:"trogir",via:[W.soltaW1,H.krknjasi.c],mark:["krknjasi"],note:"Rückschlag mit Badestopp Blaue Lagune, nachmittags zurück in Trogir."}
-  ]},
- {id:"C", color:"#e76f51", name:"C · Offene Adria: Vis & Lastovo",
-  sub:"Die sportliche Außenrunde zu den entlegensten Inseln — Kais in Stomorska, Vis, Komiža, Ubli (Lastovo), Vela Luka und Jelsa. Berührt T1-Stopps, aber durchweg an anderen Wochentagen als die Riva-Flotte (soweit deren Takt bekannt ist).",
-  days:[
-   {d:"Sa",from:"trogir",to:"stomorska",via:[H.krknjasi.c,[43.41,16.25]],mark:["krknjasi"],note:"Mittags los, westlich um Čiovo mit Badestopp Blaue Lagune — abends Stomorska, ein Stammplatz der Motorsegler-Flotte."},
-   {d:"So",from:"stomorska",to:"vis",via:[],note:"Offener Schlag nach Vis-Stadt, Liegeplatz an der Riva; abends Weinkeller oder Militärtunnel-Tour."},
-   {d:"Mo",from:"vis",to:"komiza",via:[W.visN,W.visW,H.bisevo.c],mark:["bisevo"],note:"Um Vis' Westkap, mittags Blaue Grotte auf Biševo, kurze Etappe nach Komiža (Kai vorab klären)."},
-   {d:"Di",from:"komiza",to:"ubli",via:[],note:"Königsetappe (~37 sm) übers offene Meer in den Naturpark Lastovo; abends Transfer ins Bergdorf, nachts Sternenhimmel."},
-   {d:"Mi",from:"ubli",to:"velaluka",via:[W.lastW1,W.lastN,H.lastovo.c],mark:["lastovo"],note:"Um Lastovos Westkap, Badestopp in der Zaklopatica-Lagune, nachmittags nach Vela Luka (Korčula-Stadt liegt Mi bei der Riva-Flotte — daher bewusst die Westseite)."},
-   {d:"Do",from:"velaluka",to:"jelsa",via:[[43.16,16.34],[43.205,16.355],[43.19,16.50]],note:"Um Kap Pelegrin in den Hvarski Kanal — Nacht am Ausflugsschiff-Kai von Jelsa (Eignung mit Basis klären; Ausweich Stari Grad)."},
-   {d:"Fr",from:"jelsa",to:"trogir",via:[W.vrataSplit,[43.43,16.35],H.krknjasi.c],mark:["krknjasi"],note:"Durchs Splitska Vrata, dann südlich um Čiovo mit letztem Badestopp Blaue Lagune — nachmittags zurück in Trogir."}
-  ]},
- {id:"D", color:"#7c3aed", name:"D · Korčula, Mljet & Split",
-  sub:"Die große Südost-Runde: Stari Grad, Korčula-Stadt, dann Mljet mit Nacht am Fährkai Sobra (Ostseite), Inselwanderung mit Wiedereinstieg in Sobra, NP-Seen ab Polače — Donnerstagabend Split, Freitag gemütlich zur Basis. Nutzt das Wochenbudget am besten aus (~190 sm).",
-  days:[
-   {d:"Sa",from:"trogir",to:"starigrad",via:[H.krknjasi.c,[43.43,16.35],W.vrataSplit],note:"Mittags los, westlich um Čiovo (Badestopp Blaue Lagune möglich), durchs Splitska Vrata in die tiefe Bucht von Stari Grad — Abend im ältesten Städtchen der Adria."},
-   {d:"So",from:"starigrad",to:"korcula",via:[[43.19,16.53],[43.215,16.555],[43.20,16.85],[43.115,17.19]],note:"Aus der Stari-Grad-Bucht um die Kabal-Halbinsel, durch den Hvarski Kanal und um Kap Sućuraj — längste Etappe der Woche (~43 sm), nachmittags Einlaufen vor den Stadtmauern von Korčula."},
-   {d:"Mo",from:"korcula",to:"sobra",via:[[42.80,17.55]],note:"Durch den Pelješki-Kanal nach Mljet: Nacht am Fährkai von Sobra auf der stillen Ostseite, Abendessen in der Konoba."},
-   {d:"Di",from:"sobra",to:"polace",via:[[42.78,17.52]],mark:["okuklje"],note:"Morgens Rundwanderung Sobra–Prožura–Okuklje mit Bad (~2–3 h), mittags in Sobra wieder einsteigen; nachmittags Kurzschlag nach Polače — Abend am NP-Rand."},
-   {d:"Mi",from:"polace",to:"velaluka",via:[[42.80,17.40]],note:"Früh in den Nationalpark (Salzseen, Klosterinsel Sv. Marija), mittags Langschlag südlich an Korčula vorbei nach Vela Luka."},
-   {d:"Do",from:"velaluka",to:"split",via:[[43.20,16.36],W.vrataSplit],note:"Um Kap Pelegrin und durchs Splitska Vrata — Donnerstagabend Riva & Diokletianpalast in Split (Kai früh reservieren)."},
-   {d:"Fr",from:"split",to:"trogir",via:[[43.43,16.35],H.krknjasi.c],mark:["krknjasi"],note:"Kurzer Ausklang: südlich um Čiovo, letzter Badestopp Blaue Lagune, mittags/nachmittags zurück in Trogir."}
-  ]},
- {id:"E", color:"#0891b2", name:"E · Inselhüpfen Šibenik & Kornaten (ohne Krka)",
-  sub:"Die Insel-Version der Nordrunde: keine Flussfahrt, dafür Insel-Nächte auf Prvić, Murter, Dugi Otok und Zlarin plus Kornaten-Panorama — und zum Finale die Donnerstagsnacht in Split. Hinweis: Die kleinen Fährkais von Prvić Luka und Zlarin sind für 33 m mit der Basis abzuklären (Ausweich Tribunj bzw. Šibenik).",
-  days:[
-   {d:"Sa",from:"trogir",to:"primosten",via:[W.ploca],note:"Mittags los, um Kap Ploča — Abend in den Gassen von Primošten, Wein aus den Bucavac-Terrassen."},
-   {d:"So",from:"primosten",to:"prvic",via:[[43.70,15.82]],note:"Kurzetappe mit langem Badestopp in der Tijašćica-Bucht (Insel Tijat) — Nacht am Fährkai von Prvić Luka (mit Basis klären; Ausweich Tribunj)."},
-   {d:"Mo",from:"prvic",to:"murter",via:[[43.693,15.765],H.kaprije.c,H.zirje.c,[43.705,15.70]],mark:["kaprije","zirje"],note:"Inselhüpfen: Badestopps Kaprije und Žirje (Festungsblick über die Kornaten), abends Kai in Betina/Murter."},
-   {d:"Di",from:"murter",to:"sali",via:[W.zutE,W.zut,W.kornatCh],note:"Durch den Kornati-Kanal mit Badestopp bei Žut, abends Fährkai in Sali auf Dugi Otok."},
-   {d:"Mi",from:"sali",to:"zlarin",via:[[43.905,15.21],[43.858,15.23],H.piskera.c,[43.744,15.386],[43.72,15.65]],mark:["piskera"],note:"Südlich um Dugi Otok, Badestopp an der Proversa-Enge (Telašćica-Einfahrt; wer den Mir-See will: +8 sm, dafür Žakan auslassen), Außenkornaten-Panorama, Badestopp Ravni Žakan — Nacht auf der Koralleninsel Zlarin (mit Basis klären; Ausweich Šibenik)."},
-   {d:"Do",from:"zlarin",to:"split",via:[H.krapanj.c,W.ploca,[43.43,16.35]],mark:["krapanj"],note:"Morgens Schwammtaucher-Insel Krapanj, dann Langschlag südlich um Čiovo — Donnerstagabend Riva & Diokletianpalast in Split."},
-   {d:"Fr",from:"split",to:"trogir",via:[[43.43,16.35],H.krknjasi.c],mark:["krknjasi"],note:"Vormittag Altstadt Split, dann westlich um Čiovo mit letztem Badestopp Blaue Lagune — nachmittags zurück in Trogir."}
-  ]},
- {id:"F", color:"#db2777", name:"F · Vis & Telašćica: Nord-Süd-Kombination",
-  sub:"Der C-Kern (Komiža, Blaue Grotte, Vis) kombiniert mit Sali und dem NP Telašćica — dafür ohne Lastovo, Vela Luka und Jelsa (beides zusammen sprengt die 43-sm-Ketten). Süden zuerst, dann der Nordsprung: sechs verschiedene Häfen, jede Nacht ein anderer Kai.",
-  days:[
-   {d:"Sa",from:"trogir",to:"rogoznica",via:[W.ploca],note:"Mittags los, um Kap Ploča nach Rogoznica — abends Drachenauge & Riva."},
-   {d:"So",from:"rogoznica",to:"vis",via:[W.ploca],note:"Offener Süd-Sprung (~30 sm) übers freie Wasser an die Riva von Vis-Stadt — abends Weinkeller oder Militärtunnel-Tour."},
-   {d:"Mo",from:"vis",to:"komiza",via:[W.visN,W.visW,H.bisevo.c],mark:["bisevo"],note:"Früh los, um Vis' Westkap zur Blauen Grotte (bestes Licht 9–12 Uhr), dann Kurzschlag nach Komiža — nachmittags Kieselstrände, abends Fischerstädtchen unterm Hum."},
-   {d:"Di",from:"komiza",to:"primosten",via:[W.ploca],note:"Nord-Sprung (~33 sm) zurück ans Festland — Abend in den Gassen von Primošten, Wein aus den Bucavac-Terrassen."},
-   {d:"Mi",from:"primosten",to:"sali",via:[H.kaprije.c,W.zutE,W.kornatCh],mark:["kaprije"],note:"Langschlag (~40 sm): Badestopp Kaprije, durch den Kakan- und den Kornati-Kanal — abends Fährkai in Sali auf Dugi Otok."},
-   {d:"Do",from:"sali",to:"tribunj",via:[[43.905,15.21],[43.858,15.23],[43.875,15.19],H.telascica.c,[43.875,15.19],[43.858,15.23],H.piskera.c,[43.744,15.386],[43.72,15.65]],mark:["telascica","piskera"],note:"Morgens Wanderung von Sali über den Inselrücken zum Jezero Mir (~2–2½ h, NP Telašćica); das Schiff verholt parallel südlich um Dugi Otok durch die Proversa-Enge und nimmt die Gruppe per Tender in der Mir-Bucht auf. Nachmittags Außenkornaten-Panorama mit Badestopp Ravni Žakan — Nacht am Kai in Tribunj."},
-   {d:"Fr",from:"tribunj",to:"trogir",via:[W.ploca,H.krknjasi.c],mark:["krknjasi"],note:"Rückschlag um Kap Ploča mit letztem Badestopp Blaue Lagune — nachmittags zurück in Trogir."}
+   {d:"Sa",from:"trogir",to:"vis",via:[H.krknjasi.c,W.soltaW1],note:"Mittags los, westlich um Čiovo und offener Schlag nach Vis-Stadt (~29 sm, gut 3 Stunden) — abends Riva, Weinkeller oder Militärtunnel-Tour."},
+   {d:"So",from:"vis",to:"komiza",via:[W.visN,W.visW,H.bisevo.c],mark:["bisevo"],note:"Früh los, um Vis' Westkap zur Blauen Grotte (bestes Licht 9–12 Uhr), dann Kurzschlag nach Komiža — nachmittags Kieselstrände, abends Fischerstädtchen unterm Hum."},
+   {d:"Mo",from:"komiza",to:"primosten",via:[W.ploca],note:"Nord-Sprung (~33 sm) zurück ans Festland — Abend in den Gassen von Primošten, Wein aus den Bucavac-Terrassen."},
+   {d:"Di",from:"primosten",to:"sali",via:[H.kaprije.c,W.zutE,W.kornatCh],mark:["kaprije"],note:"Langschlag (~40 sm): Badestopp Kaprije, durch den Kakan- und den Kornati-Kanal — abends Fährkai in Sali auf Dugi Otok."},
+   {d:"Mi",from:"sali",to:"tribunj",via:[[43.905,15.21],[43.858,15.23],[43.875,15.19],H.telascica.c,[43.875,15.19],[43.858,15.23],H.piskera.c,[43.744,15.386],[43.72,15.65]],mark:["telascica","piskera"],note:"Morgens Wanderung von Sali über den Inselrücken zum Jezero Mir (~2–2½ h, NP Telašćica); das Schiff verholt parallel durch die Proversa-Enge und nimmt die Gruppe per Tender in der Mir-Bucht auf. Nachmittags Außenkornaten mit Badestopp Ravni Žakan — Nacht am Kai in Tribunj."},
+   {d:"Do",from:"tribunj",to:"rogoznica",via:[H.zlarin.c,H.krapanj.c],mark:["zlarin","krapanj"],note:"Gemütlicher Ausklang-Tag: Badestopps auf der Koralleninsel Zlarin und bei der Schwammtaucher-Insel Krapanj — abends Riva von Rogoznica, Spaziergang zum Drachenauge."},
+   {d:"Fr",from:"rogoznica",to:"trogir",via:[W.ploca,H.krknjasi.c],mark:["krknjasi"],note:"Um Kap Ploča, letzter Badestopp Blaue Lagune, nachmittags zurück an den Kai in Trogir."}
   ]}
 ];
 
@@ -919,7 +859,7 @@ const seaLayer=L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png
 const stdLayer=L.layerGroup(STD.map(s=>L.marker([s[1],s[2]],{icon:L.divIcon({className:'',html:'<div class="stdlab"></div>',iconSize:[10,10],iconAnchor:[5,5]}),interactive:true,zIndexOffset:-100})
   .bindTooltip(s[0]+" · Standardrouten-Stopp",{direction:'top',offset:[0,-4]})));
 
-let activeLayer=null, activeId="A", selDay=-1;
+let activeLayer=null, activeId="F", selDay=-1;
 function overlapList(v){const set=new Set();v.days.forEach(dd=>{[dd.from,dd.to].forEach(k=>{if(H[k].std)set.add(H[k].n.split(" (")[0]);});(dd.via||[]).forEach(()=>{});});return [...set];}
 
 function render(){
