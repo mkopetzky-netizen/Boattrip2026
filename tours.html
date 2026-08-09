@@ -141,7 +141,8 @@ function render(){
       ${t.link?`<a class="linkbtn" href="${esc(t.link)}" target="_blank" rel="noopener">${btn}</a>`:""}
       <div class="plist">${pool.map(p=>`<label><input type="checkbox" ${su[san(p)]?"checked":""} onchange="toggle('${id}',this)" data-name="${esc(p)}">${esc(p)}</label>`).join("")||'<span style="font-size:12.5px;color:var(--muted)">Teilnehmerliste folgt — trag dich unten ein:</span>'}</div>
       <div class="other"><input type="text" id="on_${id}" placeholder="Name (falls nicht in der Liste)"><button onclick="signOther('${id}')">＋ anmelden</button></div>
-      <button class="del" onclick="delTour('${id}',this)">Tour entfernen</button>
+      <div id="er_${id}" style="display:none;gap:7px;margin-top:8px"><input type="datetime-local" id="et_${id}" value="${t.start||""}" style="flex:1;border:1.5px solid var(--line);border-radius:9px;padding:8px 10px;font-size:13.5px"><button onclick="saveStart('${id}')" style="border:none;background:var(--ok);color:#fff;border-radius:9px;padding:0 14px;font-size:14px;font-weight:700;cursor:pointer">✔ Speichern</button></div>
+      <button class="del" style="color:var(--f);margin-right:14px" onclick="document.getElementById('er_${id}').style.display='flex'">🕒 Startzeit ändern</button><button class="del" onclick="delTour('${id}',this)">Tour entfernen</button>
     </div>`;
   }).join("");
 }
@@ -156,6 +157,10 @@ window.signOther=async function(id){
   myName=myName||v; localStorage.setItem("bt26_name",myName);
   (tours[id].signups=tours[id].signups||{})[san(v)]=v;
   await save("/tours/"+id+"/signups/"+encodeURIComponent(san(v)),v);
+};
+window.saveStart=async function(id){
+  const v=document.getElementById('et_'+id).value; if(!v)return;
+  tours[id].start=v; await save("/tours/"+id+"/start",v);
 };
 window.delTour=async function(id,btn){
   if(btn.textContent!=="Wirklich entfernen? Nochmal tippen!"){ btn.textContent="Wirklich entfernen? Nochmal tippen!"; setTimeout(()=>{btn.textContent="Tour entfernen";},3000); return; }
