@@ -80,6 +80,7 @@ const PARTICIPANTS=["Carola S.", "Christoph B.", "Damian B.", "Dora V.", "Doroth
 const $=id=>document.getElementById(id);
 const demo=!DB_URL;
 let tours={}, myName=localStorage.getItem("bt26_name")||"";
+function san(n){return String(n).replace(/[.#$/\[\]]/g,"").trim()||"x";}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function kindOf(url){
   if(/komoot\./i.test(url))return["Komoot","🚴 In Komoot öffnen"];
@@ -107,7 +108,7 @@ async function save(path,val,method){
 // ---- UI ----
 function namePool(){
   const set=new Set(PARTICIPANTS);
-  Object.values(tours).forEach(t=>Object.keys(t.signups||{}).forEach(n=>set.add(n)));
+  Object.values(tours).forEach(t=>Object.values(t.signups||{}).forEach(n=>set.add(n)));
   if(myName)set.add(myName);
   return[...set];
 }
@@ -129,12 +130,12 @@ function render(){
     const t=tours[id], su=t.signups||{}, n=Object.keys(su).length;
     const [_,btn]=kindOf(t.link||"");
     const past=t.start&&new Date(t.start)<now;
-    const pool=[...new Set([...PARTICIPANTS,...Object.keys(su)])];
+    const pool=[...new Set([...PARTICIPANTS,...Object.values(su)])];
     return `<div class="tour ${past?'past':''}">
       <div class="top"><h3>${esc(t.title)}</h3><span class="cnt">${n} angemeldet</span></div>
       <div class="meta">🕒 <b>${fmt(t.start)}</b> · angeboten von <b>${esc(t.by||"?")}</b>${t.note?`<br>💬 ${esc(t.note)}`:""}</div>
       ${t.link?`<a class="linkbtn" href="${esc(t.link)}" target="_blank" rel="noopener">${btn}</a>`:""}
-      <div class="plist">${pool.map(p=>`<label><input type="checkbox" ${su[p]?"checked":""} onchange="toggle('${id}',this)" data-name="${esc(p)}">${esc(p)}</label>`).join("")||'<span style="font-size:12.5px;color:var(--muted)">Teilnehmerliste folgt — trag dich unten ein:</span>'}</div>
+      <div class="plist">${pool.map(p=>`<label><input type="checkbox" ${su[san(p)]?"checked":""} onchange="toggle('${id}',this)" data-name="${esc(p)}">${esc(p)}</label>`).join("")||'<span style="font-size:12.5px;color:var(--muted)">Teilnehmerliste folgt — trag dich unten ein:</span>'}</div>
       <div class="other"><input type="text" id="on_${id}" placeholder="Name (falls nicht in der Liste)"><button onclick="signOther('${id}')">＋ anmelden</button></div>
       <button class="del" onclick="delTour('${id}',this)">Tour entfernen</button>
     </div>`;
@@ -142,14 +143,15 @@ function render(){
 }
 window.toggle=async function(id,cb){
   const p=cb.dataset.name;
-  if(cb.checked){ (tours[id].signups=tours[id].signups||{})[p]=true; await save("/tours/"+id+"/signups/"+encodeURIComponent(p),true); }
-  else{ delete (tours[id].signups||{})[p]; await save("/tours/"+id+"/signups/"+encodeURIComponent(p),undefined,"DELETE"); }
+  const k=san(p);
+  if(cb.checked){ (tours[id].signups=tours[id].signups||{})[k]=p; await save("/tours/"+id+"/signups/"+encodeURIComponent(k),p); }
+  else{ delete (tours[id].signups||{})[k]; await save("/tours/"+id+"/signups/"+encodeURIComponent(k),undefined,"DELETE"); }
 };
 window.signOther=async function(id){
   const v=($('on_'+id).value||"").trim(); if(!v)return;
   myName=myName||v; localStorage.setItem("bt26_name",myName);
-  (tours[id].signups=tours[id].signups||{})[v]=true;
-  await save("/tours/"+id+"/signups/"+encodeURIComponent(v),true);
+  (tours[id].signups=tours[id].signups||{})[san(v)]=v;
+  await save("/tours/"+id+"/signups/"+encodeURIComponent(san(v)),v);
 };
 window.delTour=async function(id,btn){
   if(btn.textContent!=="Wirklich entfernen? Nochmal tippen!"){ btn.textContent="Wirklich entfernen? Nochmal tippen!"; setTimeout(()=>{btn.textContent="Tour entfernen";},3000); return; }
@@ -162,7 +164,7 @@ $('bAdd').onclick=async()=>{
   if(!by){alert("Bitte deinen Namen wählen (Angeboten von).");return;}
   if(!start){alert("Bitte Startzeit angeben.");return;}
   const id="t"+Date.now();
-  tours[id]={title,link,start,by,note:$('fNote').value.trim(),created:new Date().toISOString(),signups:{[by]:true}};
+  tours[id]={title,link,start,by,note:$('fNote').value.trim(),created:new Date().toISOString(),signups:{[san(by)]:by}};
   await save("/tours/"+id,tours[id]);
   $('fTitle').value="";$('fLink').value="";$('fNote').value="";
 };
