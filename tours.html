@@ -53,6 +53,8 @@
   <p class="sub">Wer eine Tour anbieten will (Komoot, Google Maps oder ein anderer Link), trägt sie hier mit Startzeit ein — alle anderen melden sich per Häkchen an.</p>
   <div id="dbstate"></div>
   <div class="card">
+    <button class="btn" id="bNew" style="margin-top:0">➕ Neue Tour anlegen</button>
+    <div id="formFields" style="display:none">
     <h2>➕ Neue Tour anbieten</h2>
     <label class="f">Titel der Tour</label>
     <input type="text" id="fTitle" placeholder="z. B. Radrunde Vis – Komiža">
@@ -65,6 +67,8 @@
     <label class="f">Notiz (optional — Treffpunkt, Dauer, Schwierigkeit …)</label>
     <textarea id="fNote" placeholder="z. B. Treffpunkt Gangway, ca. 3 h, E-Bike empfohlen"></textarea>
     <button class="btn" id="bAdd">Tour einstellen</button>
+    <button id="bCancel" style="width:100%;margin-top:8px;border:1.5px solid var(--line);background:#fff;color:var(--muted);border-radius:10px;padding:10px;font-size:13.5px;cursor:pointer">Abbrechen</button>
+    </div>
   </div>
   <div id="list"></div>
   <p class="sub" style="margin-top:14px">Anmeldung auf Vertrauensbasis: Jeder hakt seinen eigenen Namen an (Abhaken meldet ab). Der Anbieter einer Tour kann sie über „Tour entfernen“ wieder löschen.</p>
@@ -158,6 +162,9 @@ window.delTour=async function(id,btn){
   delete tours[id];
   await save("/tours/"+id,undefined,"DELETE");
 };
+function showForm(s){ $('formFields').style.display=s?"block":"none"; $('bNew').style.display=s?"none":"block"; }
+$('bNew').onclick=()=>showForm(true);
+$('bCancel').onclick=()=>showForm(false);
 $('bAdd').onclick=async()=>{
   const title=$('fTitle').value.trim(), link=$('fLink').value.trim(), start=$('fStart').value, by=($('fBy').value==="__other"?myName:$('fBy').value)||myName;
   if(!title){alert("Bitte einen Titel eingeben.");return;}
@@ -167,6 +174,7 @@ $('bAdd').onclick=async()=>{
   tours[id]={title,link,start,by,note:$('fNote').value.trim(),created:new Date().toISOString(),signups:{[san(by)]:by}};
   await save("/tours/"+id,tours[id]);
   $('fTitle').value="";$('fLink').value="";$('fNote').value="";
+  showForm(false);
 };
 load();
 if(!demo){ setInterval(load,20000); document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")load();}); }
